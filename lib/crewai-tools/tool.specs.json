@@ -19357,6 +19357,539 @@
       }
     },
     {
+      "description": "Retrieve the call detail record for a Plivo call by its call UUID, including direction, state, duration, and cost.",
+      "env_vars": [
+        {
+          "default": null,
+          "description": "Plivo account Auth ID",
+          "name": "PLIVO_AUTH_ID",
+          "required": true
+        },
+        {
+          "default": null,
+          "description": "Plivo account Auth Token",
+          "name": "PLIVO_AUTH_TOKEN",
+          "required": true
+        }
+      ],
+      "humanized_name": "Get Plivo call details",
+      "init_params_schema": {
+        "$defs": {
+          "EnvVar": {
+            "properties": {
+              "default": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Default"
+              },
+              "description": {
+                "title": "Description",
+                "type": "string"
+              },
+              "name": {
+                "title": "Name",
+                "type": "string"
+              },
+              "required": {
+                "default": true,
+                "title": "Required",
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "name",
+              "description"
+            ],
+            "title": "EnvVar",
+            "type": "object"
+          },
+          "ToolFailurePolicy": {
+            "description": "How an agent reacts when one of its tools reports a failure.",
+            "enum": [
+              "ignore",
+              "warn",
+              "raise"
+            ],
+            "title": "ToolFailurePolicy",
+            "type": "string"
+          }
+        },
+        "properties": {
+          "auth_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Auth Id"
+          },
+          "auth_token": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Auth Token"
+          }
+        },
+        "required": [],
+        "title": "PlivoCallDetailsTool",
+        "type": "object"
+      },
+      "name": "PlivoCallDetailsTool",
+      "package_dependencies": [
+        "plivo"
+      ],
+      "run_params_schema": {
+        "description": "Input for PlivoCallDetailsTool.",
+        "properties": {
+          "call_uuid": {
+            "description": "Identifier of the call to retrieve, found in the Plivo console or a call webhook.",
+            "title": "Call Uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "call_uuid"
+        ],
+        "title": "PlivoCallDetailsToolSchema",
+        "type": "object"
+      }
+    },
+    {
+      "description": "Place an outbound phone call through Plivo. The call connects the sender number to the destination and follows the call flow returned by the answer URL.",
+      "env_vars": [
+        {
+          "default": null,
+          "description": "Plivo account Auth ID",
+          "name": "PLIVO_AUTH_ID",
+          "required": true
+        },
+        {
+          "default": null,
+          "description": "Plivo account Auth Token",
+          "name": "PLIVO_AUTH_TOKEN",
+          "required": true
+        },
+        {
+          "default": null,
+          "description": "Default Plivo caller number for outbound calls",
+          "name": "PLIVO_FROM_NUMBER",
+          "required": false
+        },
+        {
+          "default": null,
+          "description": "Default answer XML URL for outbound calls",
+          "name": "PLIVO_ANSWER_URL",
+          "required": false
+        }
+      ],
+      "humanized_name": "Make a phone call with Plivo",
+      "init_params_schema": {
+        "$defs": {
+          "EnvVar": {
+            "properties": {
+              "default": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Default"
+              },
+              "description": {
+                "title": "Description",
+                "type": "string"
+              },
+              "name": {
+                "title": "Name",
+                "type": "string"
+              },
+              "required": {
+                "default": true,
+                "title": "Required",
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "name",
+              "description"
+            ],
+            "title": "EnvVar",
+            "type": "object"
+          },
+          "ToolFailurePolicy": {
+            "description": "How an agent reacts when one of its tools reports a failure.",
+            "enum": [
+              "ignore",
+              "warn",
+              "raise"
+            ],
+            "title": "ToolFailurePolicy",
+            "type": "string"
+          }
+        },
+        "properties": {
+          "answer_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Answer Url"
+          },
+          "auth_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Auth Id"
+          },
+          "auth_token": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Auth Token"
+          },
+          "from_": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "From"
+          }
+        },
+        "required": [],
+        "title": "PlivoMakeCallTool",
+        "type": "object"
+      },
+      "name": "PlivoMakeCallTool",
+      "package_dependencies": [
+        "plivo"
+      ],
+      "run_params_schema": {
+        "description": "Input for PlivoMakeCallTool.",
+        "properties": {
+          "answer_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Publicly reachable URL that returns Plivo answer XML describing the call flow. When omitted, PLIVO_ANSWER_URL or the tool default is used.",
+            "title": "Answer Url"
+          },
+          "to_": {
+            "description": "Destination number to call, in E.164 format, for example +14155550123.",
+            "title": "To",
+            "type": "string"
+          }
+        },
+        "required": [
+          "to_"
+        ],
+        "title": "PlivoMakeCallToolSchema",
+        "type": "object"
+      }
+    },
+    {
+      "description": "Retrieve the record for a Plivo message by its message UUID, including direction, state, and cost. The record does not include the message body.",
+      "env_vars": [
+        {
+          "default": null,
+          "description": "Plivo account Auth ID",
+          "name": "PLIVO_AUTH_ID",
+          "required": true
+        },
+        {
+          "default": null,
+          "description": "Plivo account Auth Token",
+          "name": "PLIVO_AUTH_TOKEN",
+          "required": true
+        }
+      ],
+      "humanized_name": "Get Plivo message details",
+      "init_params_schema": {
+        "$defs": {
+          "EnvVar": {
+            "properties": {
+              "default": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Default"
+              },
+              "description": {
+                "title": "Description",
+                "type": "string"
+              },
+              "name": {
+                "title": "Name",
+                "type": "string"
+              },
+              "required": {
+                "default": true,
+                "title": "Required",
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "name",
+              "description"
+            ],
+            "title": "EnvVar",
+            "type": "object"
+          },
+          "ToolFailurePolicy": {
+            "description": "How an agent reacts when one of its tools reports a failure.",
+            "enum": [
+              "ignore",
+              "warn",
+              "raise"
+            ],
+            "title": "ToolFailurePolicy",
+            "type": "string"
+          }
+        },
+        "properties": {
+          "auth_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Auth Id"
+          },
+          "auth_token": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Auth Token"
+          }
+        },
+        "required": [],
+        "title": "PlivoMessageDetailsTool",
+        "type": "object"
+      },
+      "name": "PlivoMessageDetailsTool",
+      "package_dependencies": [
+        "plivo"
+      ],
+      "run_params_schema": {
+        "description": "Input for PlivoMessageDetailsTool.",
+        "properties": {
+          "message_uuid": {
+            "description": "Identifier of the message to retrieve, returned when the message was sent.",
+            "title": "Message Uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message_uuid"
+        ],
+        "title": "PlivoMessageDetailsToolSchema",
+        "type": "object"
+      }
+    },
+    {
+      "description": "Send a text message (SMS) to one or more phone numbers through Plivo. Provide the destination number in E.164 format and the message body.",
+      "env_vars": [
+        {
+          "default": null,
+          "description": "Plivo account Auth ID",
+          "name": "PLIVO_AUTH_ID",
+          "required": true
+        },
+        {
+          "default": null,
+          "description": "Plivo account Auth Token",
+          "name": "PLIVO_AUTH_TOKEN",
+          "required": true
+        },
+        {
+          "default": null,
+          "description": "Default Plivo sender number for outbound SMS",
+          "name": "PLIVO_SRC_NUMBER",
+          "required": false
+        }
+      ],
+      "humanized_name": "Send an SMS with Plivo",
+      "init_params_schema": {
+        "$defs": {
+          "EnvVar": {
+            "properties": {
+              "default": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Default"
+              },
+              "description": {
+                "title": "Description",
+                "type": "string"
+              },
+              "name": {
+                "title": "Name",
+                "type": "string"
+              },
+              "required": {
+                "default": true,
+                "title": "Required",
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "name",
+              "description"
+            ],
+            "title": "EnvVar",
+            "type": "object"
+          },
+          "ToolFailurePolicy": {
+            "description": "How an agent reacts when one of its tools reports a failure.",
+            "enum": [
+              "ignore",
+              "warn",
+              "raise"
+            ],
+            "title": "ToolFailurePolicy",
+            "type": "string"
+          }
+        },
+        "properties": {
+          "auth_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Auth Id"
+          },
+          "auth_token": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Auth Token"
+          },
+          "src": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Src"
+          }
+        },
+        "required": [],
+        "title": "PlivoSendSMSTool",
+        "type": "object"
+      },
+      "name": "PlivoSendSMSTool",
+      "package_dependencies": [
+        "plivo"
+      ],
+      "run_params_schema": {
+        "description": "Input for PlivoSendSMSTool.",
+        "properties": {
+          "dst": {
+            "description": "Destination number in E.164 format, for example +14155550123. Reach several recipients by joining numbers with '<'.",
+            "title": "Dst",
+            "type": "string"
+          },
+          "text": {
+            "description": "Body of the text message to send.",
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "dst",
+          "text"
+        ],
+        "title": "PlivoSendSMSToolSchema",
+        "type": "object"
+      }
+    },
+    {
       "description": "Search Qdrant vector DB for relevant documents.",
       "env_vars": [
         {
