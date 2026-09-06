@@ -19751,6 +19751,121 @@
       }
     },
     {
+      "description": "Look up a phone number through Plivo to find its carrier, line type (landline, mobile, or voip), country, and formatting. Provide the number in E.164 format.",
+      "env_vars": [
+        {
+          "default": null,
+          "description": "Plivo account Auth ID",
+          "name": "PLIVO_AUTH_ID",
+          "required": true
+        },
+        {
+          "default": null,
+          "description": "Plivo account Auth Token",
+          "name": "PLIVO_AUTH_TOKEN",
+          "required": true
+        }
+      ],
+      "humanized_name": "Look up a phone number with Plivo",
+      "init_params_schema": {
+        "$defs": {
+          "EnvVar": {
+            "properties": {
+              "default": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Default"
+              },
+              "description": {
+                "title": "Description",
+                "type": "string"
+              },
+              "name": {
+                "title": "Name",
+                "type": "string"
+              },
+              "required": {
+                "default": true,
+                "title": "Required",
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "name",
+              "description"
+            ],
+            "title": "EnvVar",
+            "type": "object"
+          },
+          "ToolFailurePolicy": {
+            "description": "How an agent reacts when one of its tools reports a failure.",
+            "enum": [
+              "ignore",
+              "warn",
+              "raise"
+            ],
+            "title": "ToolFailurePolicy",
+            "type": "string"
+          }
+        },
+        "properties": {
+          "auth_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Auth Id"
+          },
+          "auth_token": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Auth Token"
+          }
+        },
+        "required": [],
+        "title": "PlivoNumberLookupTool",
+        "type": "object"
+      },
+      "name": "PlivoNumberLookupTool",
+      "package_dependencies": [
+        "plivo"
+      ],
+      "run_params_schema": {
+        "description": "Input for PlivoNumberLookupTool.",
+        "properties": {
+          "number": {
+            "description": "Phone number to look up, in E.164 format, for example +14155550123.",
+            "title": "Number",
+            "type": "string"
+          }
+        },
+        "required": [
+          "number"
+        ],
+        "title": "PlivoNumberLookupToolSchema",
+        "type": "object"
+      }
+    },
+    {
       "description": "Send a text message (SMS) to one or more phone numbers through Plivo. Provide the destination number in E.164 format and the message body.",
       "env_vars": [
         {

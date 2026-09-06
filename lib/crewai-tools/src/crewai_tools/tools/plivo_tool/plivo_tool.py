@@ -45,6 +45,15 @@ CALL_FIELDS = (
     "hangup_source",
 )
 
+LOOKUP_FIELDS = (
+    "phone_number",
+    "country",
+    "format",
+    "carrier",
+    "resource_uri",
+    "api_id",
+)
+
 
 def _rest_client(auth_id: str | None, auth_token: str | None) -> Any:
     resolved_id = auth_id or os.getenv("PLIVO_AUTH_ID")
@@ -198,8 +207,12 @@ class PlivoMakeCallTool(BaseTool):
             or DEFAULT_ANSWER_URL
         )
 
+        answer_method = "GET" if answer_url == DEFAULT_ANSWER_URL else "POST"
+
         client = _rest_client(self.auth_id, self.auth_token)
-        response = client.calls.create(from_=from_, to_=to_, answer_url=answer_url)
+        response = client.calls.create(
+            from_=from_, to_=to_, answer_url=answer_url, answer_method=answer_method
+        )
         return {
             "message": getattr(response, "message", None),
             "request_uuid": getattr(response, "request_uuid", None),
@@ -289,3 +302,45 @@ class PlivoCallDetailsTool(BaseTool):
         client = _rest_client(self.auth_id, self.auth_token)
         record = client.calls.get(call_uuid)
         return _record_to_dict(record, CALL_FIELDS)
+
+
+class PlivoNumberLookupToolSchema(BaseModel):
+    """Input for PlivoNumberLookupTool."""
+
+    number: str = Field(
+        ...,
+        description="Phone number to look up, in E.164 format, for example +14155550123.",
+    )
+
+
+class PlivoNumberLookupTool(BaseTool):
+    """Look up carrier and format details for a phone number through the Plivo Lookup API."""
+
+    name: str = "Look up a phone number with Plivo"
+    description: str = (
+        "Look up a phone number through Plivo to find its carrier, line type "
+        "(landline, mobile, or voip), country, and formatting. Provide the number in E.164 format."
+    )
+    args_schema: type[BaseModel] = PlivoNumberLookupToolSchema
+    auth_id: str | None = None
+    auth_token: str | None = None
+    env_vars: list[EnvVar] = Field(
+        default_factory=lambda: [
+            EnvVar(name="PLIVO_AUTH_ID", description="Plivo account Auth ID", required=True),
+            EnvVar(
+                name="PLIVO_AUTH_TOKEN",
+                description="Plivo account Auth Token",
+                required=True,
+            ),
+        ]
+    )
+    package_dependencies: list[str] = Field(default_factory=lambda: ["plivo"])
+
+    def _run(self, **kwargs: Any) -> dict[str, Any]:
+        number = kwargs.get("number")
+        if not number:
+            raise ValueError("'number' is required")
+
+        client = _rest_client(self.auth_id, self.auth_token)
+        record = client.lookup.get(number)
+        return _record_to_dict(record, LOOKUP_FIELDS)

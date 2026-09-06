@@ -8,6 +8,7 @@ These tools give a crewAI agent access to the Plivo communications APIs so a cre
 - `PlivoMakeCallTool` places an outbound voice call that follows a call flow returned by an answer URL.
 - `PlivoMessageDetailsTool` retrieves the record for a message by its message UUID.
 - `PlivoCallDetailsTool` retrieves the call detail record for a call by its call UUID.
+- `PlivoNumberLookupTool` looks up a number to find its carrier, line type, country, and formatting.
 
 ## Installation
 

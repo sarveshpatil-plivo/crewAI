@@ -148,6 +148,7 @@ from crewai_tools.tools.plivo_tool.plivo_tool import (
     PlivoCallDetailsTool,
     PlivoMakeCallTool,
     PlivoMessageDetailsTool,
+    PlivoNumberLookupTool,
     PlivoSendSMSTool,
 )
 from crewai_tools.tools.qdrant_vector_search_tool.qdrant_search_tool import (
@@ -308,6 +309,7 @@ __all__ = [
     "PlivoCallDetailsTool",
     "PlivoMakeCallTool",
     "PlivoMessageDetailsTool",
+    "PlivoNumberLookupTool",
     "PlivoSendSMSTool",
     "QdrantVectorSearchTool",
     "RagTool",
